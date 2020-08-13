@@ -24,7 +24,6 @@ namespace SocketIO.WindowsService
         {
             Socket = new ClientWebSocket();
             await Socket.ConnectAsync(new Uri("ws://localhost:5000/ws"), CancellationToken.None);
-            Console.WriteLine($"Connection estabilished @ {DateTime.UtcNow}");
             var send = Task.Run(async () =>
             {
                 string message;
