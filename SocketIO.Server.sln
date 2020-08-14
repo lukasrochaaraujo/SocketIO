@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.Server", "SocketIO.Server\SocketIO.Server.csproj", "{CB7C4363-49DF-4D3D-BCD9-33DBE55FF2B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIO.WindowsService", "SocketIO.WindowsService\SocketIO.WindowsService.csproj", "{50B1E1BD-6356-40EE-8816-E2E000EE6ED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.WindowsService", "SocketIO.WindowsService\SocketIO.WindowsService.csproj", "{50B1E1BD-6356-40EE-8816-E2E000EE6ED5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.PackageManager", "SocketIO.PackageManager\SocketIO.PackageManager.csproj", "{65B3F1A6-8E8A-4DA3-9534-1767B954F66B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIO.Test", "SocketIO.Test\SocketIO.Test.csproj", "{6F71CC2C-441B-488D-BB62-4C13BD6B816A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{50B1E1BD-6356-40EE-8816-E2E000EE6ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50B1E1BD-6356-40EE-8816-E2E000EE6ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50B1E1BD-6356-40EE-8816-E2E000EE6ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B3F1A6-8E8A-4DA3-9534-1767B954F66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B3F1A6-8E8A-4DA3-9534-1767B954F66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B3F1A6-8E8A-4DA3-9534-1767B954F66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B3F1A6-8E8A-4DA3-9534-1767B954F66B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

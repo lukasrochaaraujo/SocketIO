@@ -5,46 +5,11 @@
     <title>Sockets</title>
 </head>
 <body>
-    <input type="text" placeholder="type a messenge" id="messageInput" />
+    <input type="text" placeholder="socket" id="socketId" />
+    <input type="text" placeholder="command" id="command" />
     <button id="sendMessage">Send</button>
-    <pre>
-        <ul id="messages"></ul>
-    </pre>
+    <ul id="messages"></ul>
 
-    <script>
-        var url = "ws://localhost:5000/ws";
-        var socket = new WebSocket(url);
-        function connect() {            
-            socket.onopen = (e) => {
-                console.log("connection estabished");
-            };
-            socket.onclose = (e) => {
-                console.log("connection closed");
-            };
-            socket.onmessage = (e) => {
-                append(list, e.data);
-                console.log(e.data);
-            };
-        }
-
-        connect();
-
-        var list = document.getElementById("messages");
-        var button = document.getElementById("sendMessage");
-        button.addEventListener("click", () => {
-            var sendMessage = (element) => {
-                console.log("sending message");
-                socket.send(element);
-            };
-
-            let message = document.getElementById('messageInput').value;
-            sendMessage(message);
-        });
-        function append(list, message) {
-            let li = document.createElement('li');
-            li.appendChild(document.createTextNode(message));
-            list.appendChild(li);
-        }
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>

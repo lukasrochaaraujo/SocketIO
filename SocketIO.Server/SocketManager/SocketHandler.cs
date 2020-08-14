@@ -27,10 +27,8 @@ namespace SocketIO.Server.SocketManager
 
         public async Task SendMessage(WebSocket socket, string message)
         {
-            if (socket.State == WebSocketState.Open)
-            {
+            if (socket != null && socket.State == WebSocketState.Open)
                 await socket.SendAsync(new ArraySegment<byte>(Encoding.ASCII.GetBytes(message), 0, message.Length), WebSocketMessageType.Text, true, CancellationToken.None);
-            }
         }
 
         public async Task SendMessage(string id, string message)
