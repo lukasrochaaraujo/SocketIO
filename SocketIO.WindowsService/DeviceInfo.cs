@@ -51,15 +51,17 @@ namespace SocketIO.WindowsService
 
         private static string CollectDisks()
         {
-            return DriveInfo.GetDrives()
-                            .Select(d => new
-                            {
-                                d.Name,
-                                d.TotalSize,
-                                d.TotalFreeSpace
-                            })
-                            .ToArray()
-                            .ToString();
+            return "";
+
+            //return DriveInfo.GetDrives()
+            //                .Select(d => new
+            //                {
+            //                    d.Name,
+            //                    d.TotalSize,
+            //                    d.TotalFreeSpace
+            //                })
+            //                .ToArray()
+            //                .ToString();
         }
 
         private static string GetFirewallInstalled()
