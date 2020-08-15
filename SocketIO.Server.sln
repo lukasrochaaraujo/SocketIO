@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.PackageManager", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.Test", "SocketIO.Test\SocketIO.Test.csproj", "{6F71CC2C-441B-488D-BB62-4C13BD6B816A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIO.SPA", "SocketIO.SPA\SocketIO.SPA.csproj", "{8D31290D-18F8-4785-A30A-3B407D89EE99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F71CC2C-441B-488D-BB62-4C13BD6B816A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D31290D-18F8-4785-A30A-3B407D89EE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D31290D-18F8-4785-A30A-3B407D89EE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D31290D-18F8-4785-A30A-3B407D89EE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D31290D-18F8-4785-A30A-3B407D89EE99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
