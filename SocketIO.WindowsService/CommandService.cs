@@ -6,21 +6,31 @@ namespace SocketIO.WindowsService
     {
         private const string CMD_TIP = "cmd";
         private const string PS_TIP = "ps";
+        private const string LOG_TIP = "log";
 
         public static bool IsACommand(string command)
         {
             return !string.IsNullOrWhiteSpace(command) &&
-                    command.Contains(CMD_TIP) || 
-                    command.Contains(PS_TIP);
+                    command.StartsWith(CMD_TIP) || 
+                    command.StartsWith(PS_TIP);
+        }
+
+        public static bool IsALogReaderCommand(string command)
+        {
+            return !string.IsNullOrWhiteSpace(command) &&
+                    command.StartsWith(LOG_TIP);
         }
 
         public static string ExecuteCommand(string command)
         {
-            if (command.Contains(CMD_TIP))
+            if (command.StartsWith(CMD_TIP))
                 return ExecuteCMDCommand(command.Split(CMD_TIP)[1]);
 
-            if (command.Contains(PS_TIP))
+            if (command.StartsWith(PS_TIP))
                 return ExecutepowerShellCommand(command.Split(PS_TIP)[1]);
+
+            if (command.StartsWith(LOG_TIP))
+                return null;
 
             return "Unrecognized command (use cmd [commands] or ps [commands])";
         }

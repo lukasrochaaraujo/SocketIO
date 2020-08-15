@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.WindowsService", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.PackageManager", "SocketIO.PackageManager\SocketIO.PackageManager.csproj", "{65B3F1A6-8E8A-4DA3-9534-1767B954F66B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIO.Test", "SocketIO.Test\SocketIO.Test.csproj", "{6F71CC2C-441B-488D-BB62-4C13BD6B816A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketIO.Test", "SocketIO.Test\SocketIO.Test.csproj", "{6F71CC2C-441B-488D-BB62-4C13BD6B816A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

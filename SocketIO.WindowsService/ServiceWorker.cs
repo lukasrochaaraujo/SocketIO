@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using SocketIO.PackageManager;
+using SocketIO.PackageManager.DeviceInfoPackage;
+using SocketIO.WindowsService.Logger;
 
 namespace SocketIO.WindowsService
 {
@@ -22,11 +24,25 @@ namespace SocketIO.WindowsService
         public async Task StartWebsockets()
         {
             Socket = new ClientWebSocket();
-            await Socket.ConnectAsync(new Uri("ws://localhost:5000/ws"), CancellationToken.None);
-            var package = new SocketPackage()
+            var package = new SocketPackage() { Message = DeviceCollector.CollectData().Serialize() };
+
+            var log = new LogCommand();
+            log.Command = "REGISTER";
+            log.Output = package.Message;
+            LoggerService.Log(log);
+
+            TRY_RECONNECT:
+            try
             {
-                Message = DeviceInfo.CollectData()
-            };
+                await Socket.ConnectAsync(new Uri("ws://localhost:5000/ws"), CancellationToken.None);
+            }
+            catch
+            {
+                Socket = new ClientWebSocket();
+                await Task.Delay(5000);
+                goto TRY_RECONNECT;
+            }            
+            
             await Socket.SendAsync(new ArraySegment<byte>(package.ToBytes()), WebSocketMessageType.Text, true, CancellationToken.None);
             var receive = ReceiveAsync(Socket);
             await Task.WhenAll(receive);
@@ -42,8 +58,15 @@ namespace SocketIO.WindowsService
 
                 if (CommandService.IsACommand(package.Message))
                 {
+                    var log = new LogCommand();
+                    log.Command = package.Message;
+
                     package.ReverseOrigins();
                     package.Message = CommandService.ExecuteCommand(package.Message);
+
+                    log.Output = !CommandService.IsALogReaderCommand(log.Command) ? package.Message : "log recover";
+                    LoggerService.Log(log);
+
                     await Socket.SendAsync(new ArraySegment<byte>(package.ToBytes()), WebSocketMessageType.Text, true, CancellationToken.None);
                 }
 
