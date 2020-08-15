@@ -46,6 +46,7 @@ namespace SocketIO.PackageManager.DeviceInfoPackage
         private static List<DiskDriver> CollectDisks()
         {
             return DriveInfo.GetDrives()
+                            .Where(d => d.IsReady)
                             .Select(d => new DiskDriver
                             {
                                 Letter = d.Name,
