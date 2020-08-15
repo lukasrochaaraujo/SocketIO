@@ -18,8 +18,8 @@ export class WebSocketService {
     }));
   }
 
-  sendMessage(message: string) {
-    this.socket.send(message);
+  sendMessage(to: string, message: string) {
+    this.socket.send(`origin@target${to}@message${message}`);
   }
 
   convertPackageMessage(data: string): SocketPackage {
@@ -52,9 +52,9 @@ export class WebSocketService {
     socketPackage.SocketTargetID = targetId;
     socketPackage.Message = message;
 
-    if (socketPackage.Message.indexOf('{') >= 0) {
+    if (socketPackage.Message.indexOf('{') >= 0 && socketPackage.Message.indexOf('Command') < 0) {
       socketPackage.DeviceData = JSON.parse(socketPackage.Message);
-      socketPackage.Message = null;
+      socketPackage.Message = 'connected';
     }
 
     return socketPackage;

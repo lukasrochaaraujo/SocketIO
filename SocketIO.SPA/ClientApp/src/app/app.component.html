@@ -1,8 +1,40 @@
-<mat-toolbar color="primary">  
-    <mat-toolbar-row>
-      <span>SocketIO SPA</span>
-      <span class="toolbar-spacer"></span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar-row>
+    <span>SocketIO SPA</span>
+    <span class="toolbar-spacer"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div style="margin: auto; width: 100%; text-align: center">
+  <ng-container *ngFor="let device of DevicesConnected">
+    <mat-card class="device-card">
+      <b>{{device.HostName}}</b> <br>
+      <hr>
+      <mat-card-content>
+        <p style="font-size: .90rem;">
+          IPv4: {{device.HostIP}} <br>
+          O.S.: {{device.WindowsVersion}} <br>
+          NET: {{device.DotNetVersion}} <br>
+          Drivers: {{device.DiskDriversFormatted}} <br>
+          Antivirus: {{device.AntivirusFormatted}} <br>
+          Firewall: {{device.FirewallFormatted}}
+        </p>
+        <div>
+          <input #newCommand 
+                 type="text" 
+                 placeholder="(cmd | ps) args" 
+                 class="input-commands" 
+                 (keyup.enter)="sendMessage(device.ID, newCommand.value)">
+          <textarea 
+            class="output-commands" 
+            id="{{device.ID}}"
+            style="font-size: x-small"></textarea>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
+
+
 
 <router-outlet></router-outlet>

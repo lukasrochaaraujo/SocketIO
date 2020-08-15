@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace SocketIO.WindowsService.Logger
@@ -14,10 +13,9 @@ namespace SocketIO.WindowsService.Logger
             File.AppendAllText(LogPath, $"{DateTimeOffset.Now}: {JsonConvert.SerializeObject(command)}\r\n");
         }
 
-        public static List<LogCommand> Read()
+        public static string Read()
         {
-            string logString = File.ReadAllText(LogPath);
-            return JsonConvert.DeserializeObject<List<LogCommand>>(logString);
+            return File.ReadAllText(LogPath);
         }
     }
 }

@@ -1,3 +1,34 @@
+.toolbar {
+  margin-bottom: 10px;
+}
+
 .toolbar-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
+
+.device-card {
+  text-align: left;
+  display: inline-block;
+  margin: 10px;
+}
+
+.device-card p {
+  font-family: Consolas;
+  font-size: .7rem;
+  line-height: 1rem;
+}
+
+.device-card .input-commands {
+  width: 99%;
+  margin-bottom: 5px;
+}
+
+.device-card .output-commands {
+  height: 100px;
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: 0;
+  border: none;
+  color: indigo;
+  background-color: whitesmoke;
+}

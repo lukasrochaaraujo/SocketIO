@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using SocketIO.WindowsService.Logger;
+using System.Diagnostics;
 
 namespace SocketIO.WindowsService
 {
@@ -11,8 +12,9 @@ namespace SocketIO.WindowsService
         public static bool IsACommand(string command)
         {
             return !string.IsNullOrWhiteSpace(command) &&
-                    command.StartsWith(CMD_TIP) || 
-                    command.StartsWith(PS_TIP);
+                    command.StartsWith(CMD_TIP) ||
+                    command.StartsWith(PS_TIP) ||
+                    command.StartsWith(LOG_TIP);
         }
 
         public static bool IsALogReaderCommand(string command)
@@ -30,7 +32,7 @@ namespace SocketIO.WindowsService
                 return ExecutepowerShellCommand(command.Split(PS_TIP)[1]);
 
             if (command.StartsWith(LOG_TIP))
-                return null;
+                return LoggerService.Read();
 
             return "Unrecognized command (use cmd [commands] or ps [commands])";
         }
