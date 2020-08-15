@@ -20,7 +20,18 @@ namespace SocketIO.Server
             if (env.IsDevelopment()) 
                 app.UseDeveloperExceptionPage();
 
-            app.UseWebSockets();
+            var webSocketOptions = new WebSocketOptions()
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+                ReceiveBufferSize = 4 * 1024
+            };
+            webSocketOptions.AllowedOrigins.Add("http://localhost");
+            webSocketOptions.AllowedOrigins.Add("https://localhost");
+            webSocketOptions.AllowedOrigins.Add("http://localhost:5000");
+            webSocketOptions.AllowedOrigins.Add("https://localhost:5001");
+            webSocketOptions.AllowedOrigins.Add("http://localhost:4200");
+
+            app.UseWebSockets(webSocketOptions);
             app.MapSockets("/ws", provider.GetService<WebSocketMessageHandler>());
             app.UseStaticFiles();
         }
