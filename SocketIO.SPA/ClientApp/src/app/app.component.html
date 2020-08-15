@@ -7,7 +7,7 @@
 
 <div style="margin: auto; width: 100%; text-align: center">
   <ng-container *ngFor="let device of DevicesConnected">
-    <mat-card class="device-card">
+    <mat-card *ngIf="device != undefined" class="device-card">
       <b>{{device.HostName}}</b> <br>
       <hr>
       <mat-card-content>

@@ -21,15 +21,16 @@ namespace SocketIO.WindowsService
             }
         }
 
+        public override async Task StopAsync(CancellationToken cancellationToken)
+        {
+            await Socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "bye", CancellationToken.None);
+            await base.StopAsync(cancellationToken);
+        }
+
         public async Task StartWebsockets()
         {
             Socket = new ClientWebSocket();
-            var package = new SocketPackage() { Message = DeviceCollector.CollectData().Serialize() };
-
-            var log = new LogCommand();
-            log.Command = "REGISTER";
-            log.Output = package.Message;
-            LoggerService.Log(log);
+            var package = CollectDeviceData();
 
             TRY_RECONNECT:
             try
@@ -65,16 +66,30 @@ namespace SocketIO.WindowsService
                     package.Message = CommandService.ExecuteCommand(package.Message);
 
                     log.Output = !CommandService.IsALogReaderCommand(log.Command) ? package.Message : "log recover";
-                    LoggerService.Log(log);
-
-                    await Socket.SendAsync(new ArraySegment<byte>(package.ToBytes()), WebSocketMessageType.Text, true, CancellationToken.None);
+                    LoggerService.Log(log);                    
                 }
+                else if (package.Message.Contains("connected"))
+                {
+                    package = CollectDeviceData();
+                }
+                else
+                {
+                    package = null;
+                }
+
+                if (package != null)
+                    await Socket.SendAsync(new ArraySegment<byte>(package.ToBytes()), WebSocketMessageType.Text, true, CancellationToken.None);
 
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
-                    await client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                    await client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "bye", CancellationToken.None);
                 }
             }
+        }
+
+        public SocketPackage CollectDeviceData()
+        {
+            return new SocketPackage() { Message = DeviceCollector.CollectData().Serialize() };
         }
     }
 }

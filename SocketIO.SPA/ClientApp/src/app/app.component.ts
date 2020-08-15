@@ -31,6 +31,9 @@ export class AppComponent implements OnInit {
 	onSocketMessageEvent(socketPackage: SocketPackage) {
 		if (socketPackage.DeviceData != null && socketPackage.Message == 'connected') {			
 			this.addDevice(socketPackage.SocketOriginID, socketPackage.DeviceData);
+		} else if (socketPackage.Message == 'disconnected') {
+			this.DevicesConnected = this.DevicesConnected.filter(d => 
+				d.ID != socketPackage.SocketOriginID);
 		} else if (socketPackage.Message != 'connected') {
 			let output = document.getElementById(socketPackage.SocketOriginID);
 			output.textContent += socketPackage.Message;
@@ -58,7 +61,8 @@ export class AppComponent implements OnInit {
 		device.Firewall.map(f => {
 			device.FirewallFormatted += `[${f.Name}(${f.Status})]`;
 		});
-
-		this.DevicesConnected.push(device);
+	
+		if (this.DevicesConnected.length == 0 || this.DevicesConnected.find(d => d.ID === device.ID) == null)
+			this.DevicesConnected.push(device);
 	}
 }
