@@ -6,6 +6,10 @@
   flex: 1 1 auto;
 }
 
+.toolbar-input {
+  font-size: .8rem;
+}
+
 .device-card {
   text-align: left;
   display: inline-block;

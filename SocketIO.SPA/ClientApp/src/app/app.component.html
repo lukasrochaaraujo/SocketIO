@@ -2,6 +2,14 @@
   <mat-toolbar-row>
     <span>SocketIO SPA</span>
     <span class="toolbar-spacer"></span>
+    <div class="toolbar-input">
+      <mat-form-field>
+        <input #newCommandForAll 
+               matInput 
+               placeholder="(cmd | ps | log) for all"
+               (keyup.enter)="sendMessage('', newCommandForAll.value)">
+      </mat-form-field>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 

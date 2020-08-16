@@ -2,7 +2,6 @@ import { Component, OnInit, ApplicationRef, OnChanges, SimpleChanges, Input, Cha
 import { WebSocketService } from './web-socket.service';
 import { SocketPackage } from './model/socketPackage.model';
 import { DeviceData } from './model/device/deviceData.model';
-import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
