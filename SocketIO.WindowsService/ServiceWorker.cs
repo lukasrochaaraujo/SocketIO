@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using SocketIO.PackageManager;
-using SocketIO.PackageManager.DeviceInfoPackage;
 using SocketIO.WindowsService.Logger;
+using SocketIO.WindowsService.DeviceInfo;
 
 namespace SocketIO.WindowsService
 {

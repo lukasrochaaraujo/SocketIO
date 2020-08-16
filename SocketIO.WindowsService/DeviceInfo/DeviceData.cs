@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace SocketIO.PackageManager.DeviceInfoPackage
+namespace SocketIO.WindowsService.DeviceInfo
 {
     public class DeviceData
     {

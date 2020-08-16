@@ -15,6 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SocketIO.PackageManager\SocketIO.PackageManager.csproj" />
+    <ProjectReference Include="..\SocketIO.Server\SocketIO.Server.csproj" />
+    <ProjectReference Include="..\SocketIO.WindowsService\SocketIO.WindowsService.csproj" />
   </ItemGroup>
 
 </Project>

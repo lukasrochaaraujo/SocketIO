@@ -1,9 +1,9 @@
-using SocketIO.PackageManager;
+﻿using SocketIO.PackageManager;
 using Xunit;
 
 namespace SocketIO.Test
 {
-    public class SerializationTest
+    public class PackageManagerTest
     {
         [Fact]
         public void DeserializePackageTest()

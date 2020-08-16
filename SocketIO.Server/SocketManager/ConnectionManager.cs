@@ -29,12 +29,14 @@ namespace SocketIO.Server.SocketManager
         public async Task RemoveSocketAsync(string id)
         {
             _Connections.TryRemove(id, out var socket);
-            await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "socket connection closed", CancellationToken.None);
+            await socket?.CloseAsync(WebSocketCloseStatus.NormalClosure, "socket connection closed", CancellationToken.None);
         }
 
-        public void AddSocket(WebSocket socket)
+        public string AddSocket(WebSocket socket)
         {
-            _Connections.TryAdd(GetConnectionId(), socket);
+            string id = GetConnectionId();
+            _Connections.TryAdd(id, socket);
+            return id;
         }
 
         public string GetConnectionId()

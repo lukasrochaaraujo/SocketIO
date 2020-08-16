@@ -1,4 +1,5 @@
-﻿using SocketIO.WindowsService.Logger;
+﻿using Microsoft.Extensions.Logging;
+using SocketIO.WindowsService.Logger;
 using System.Diagnostics;
 
 namespace SocketIO.WindowsService
@@ -29,10 +30,10 @@ namespace SocketIO.WindowsService
                 return ExecuteCMDCommand(command.Split(CMD_TIP)[1]);
 
             if (command.StartsWith(PS_TIP))
-                return ExecutepowerShellCommand(command.Split(PS_TIP)[1]);
+                return ExecutePowerShellCommand(command.Split(PS_TIP)[1]);
 
             if (command.StartsWith(LOG_TIP))
-                return LoggerService.Read();
+                return ExecuteLoggerCommand(command.Split(LOG_TIP)[1]);
 
             return "Unrecognized command (use cmd [commands] or ps [commands])";
         }
@@ -49,7 +50,7 @@ namespace SocketIO.WindowsService
             return output;
         }
 
-        private static string ExecutepowerShellCommand(string args)
+        private static string ExecutePowerShellCommand(string args)
         {
             var ps = CreateProcess("powershell.exe");
             ps.StartInfo.Arguments = args;
@@ -59,6 +60,19 @@ namespace SocketIO.WindowsService
             ps.WaitForExit();
 
             return output;
+        }
+
+        private static string ExecuteLoggerCommand(string args)
+        {
+            switch (args)
+            {
+                case "first":
+                    return LoggerService.ReadFirst();
+                case "last":
+                    return LoggerService.ReadLast();
+                default:
+                    return LoggerService.ReadAll();
+            }
         }
 
         private static Process CreateProcess(string executable)

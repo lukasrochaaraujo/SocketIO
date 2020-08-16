@@ -1,4 +1,4 @@
-﻿namespace SocketIO.PackageManager.DeviceInfoPackage
+﻿namespace SocketIO.WindowsService.DeviceInfo
 {
     public class DiskDriver
     {
