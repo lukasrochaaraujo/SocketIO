@@ -5,6 +5,7 @@ using System.Linq;
 using System.Management;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 namespace SocketIO.Service.DeviceInfo
 {
@@ -60,11 +61,14 @@ namespace SocketIO.Service.DeviceInfo
         {
             var antivirusList = new List<Antivirus>();
 
-            var wmiData = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM AntiVirusProduct");
-            ManagementObjectCollection data = wmiData.Get();
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var wmiData = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM AntiVirusProduct");
+                ManagementObjectCollection data = wmiData.Get();
 
-            foreach (ManagementObject virusChecker in data)
-                antivirusList.Add(new Antivirus() { Name = virusChecker["displayName"].ToString() });
+                foreach (ManagementObject virusChecker in data)
+                    antivirusList.Add(new Antivirus() { Name = virusChecker["displayName"].ToString() });
+            }
 
             return antivirusList;
         }
@@ -73,11 +77,14 @@ namespace SocketIO.Service.DeviceInfo
         {
             var firewallList = new List<Firewall>();
 
-            var wmiData = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM FirewallProduct");
-            ManagementObjectCollection data = wmiData.Get();
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var wmiData = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM FirewallProduct");
+                ManagementObjectCollection data = wmiData.Get();
 
-            foreach (ManagementObject WmiObject in data)
-                firewallList.Add(new Firewall() { Name = WmiObject["displayName"].ToString(), Status = WmiObject["enabled"].ToString() });
+                foreach (ManagementObject WmiObject in data)
+                    firewallList.Add(new Firewall() { Name = WmiObject["displayName"].ToString(), Status = WmiObject["enabled"].ToString() });
+            }
 
             return firewallList;
         }
