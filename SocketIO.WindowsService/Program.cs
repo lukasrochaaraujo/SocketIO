@@ -12,7 +12,7 @@ namespace SocketIO.WindowsService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseWindowsService()
-                .ConfigureServices((hostContext, services) => services.AddHostedService<ServiceWorker>());
+                .ConfigureServices((hostContext, services) => services.AddHostedService<ServiceWorker>())
+                .UseWindowsService();
     }
 }
