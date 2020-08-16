@@ -1,12 +1,12 @@
-using SocketIO.WindowsService.DeviceInfo;
-using SocketIO.WindowsService.Logger;
+using SocketIO.Service.DeviceInfo;
+using SocketIO.Service.Logger;
 using System;
 using System.IO;
 using Xunit;
 
 namespace SocketIO.Test
 {
-    public class WindowsServiceTest
+    public class ServiceTest
     {
         [Fact]
         public void CollectDataTest()
