@@ -1,5 +1,3 @@
-![](https://lh3.googleusercontent.com/-SjJCP2AntwI/XoYRxI-hBjI/AAAAAAAABA4/bFi0th7AKGgQFVIOB8L-GiWSZriYhI6MgCK8BGAsYHg/s0/2020-04-02.png)
-
 # Desafio
 A empresa Battle Royalle Solutions está com a demanda para controlar máquinas Windows remotamente usando CLI.
 A empresa então decidiu que a melhor solução para eles, seria a criação de uma aplicação cliente que seria executado como um Windows Service, e uma aplicação Web para prover a interface que permitiria executar os comandos em uma ou várias máquinas.
@@ -37,3 +35,25 @@ Os seguintes pontos serão considerados para uma boa avaliação do seu projeto.
 - Uso de testes unitários
 - Utilização de tecnologias recentes, bem como a versão mais nova do C# / .NET Core 3.1
 - Utilização de recursos de integração com GitHub.
+
+# O projeto (SocketIO)
+
+O projeto foi desenvolvido utilizando arquitetura de comunicação via websockets. As tecnologias utilizadas foram:
+
+- Plataforma .NET Core 3.1
+- Topshelf
+- Angular 10
+- xUnit
+
+Os projeto foi dividos em:
+
+- SocketIO.Server: Gerenciador mestre de conexões
+- SocketIO.PackageManager: Gerenciador de pacotes (conversões)
+- SocketIO.Service: Aplicação para ser implantada (como um serviço) em máquinas clientes
+- SocketIO.SPA: Aplicação web para enviar/receber comandos das máquinas clientes
+
+### Instalação do servicço
+
+``
+terminal$ SocketIO.Service.exe install
+``

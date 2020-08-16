@@ -16,6 +16,7 @@ namespace SocketIO.Service
                     s.WhenStopped(async serviceWorker => await serviceWorker.StopAsync());
                 });
 
+                h.StartAutomatically();
                 h.RunAsLocalService();
                 h.SetServiceName("SocketIOService");
                 h.SetDisplayName("SocketIO Service");
