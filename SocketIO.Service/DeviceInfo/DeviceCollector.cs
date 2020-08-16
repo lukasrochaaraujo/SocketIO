@@ -6,7 +6,7 @@ using System.Management;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace SocketIO.WindowsService.DeviceInfo
+namespace SocketIO.Service.DeviceInfo
 {
     public static class DeviceCollector
     {

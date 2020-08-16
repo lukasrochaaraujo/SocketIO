@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SocketIO.WindowsService.Logger
+namespace SocketIO.Service.Logger
 {
     public class LogCommand
     {

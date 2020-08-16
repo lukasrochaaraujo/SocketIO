@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using SocketIO.WindowsService.Logger;
+﻿using SocketIO.Service.Logger;
 using System.Diagnostics;
 
-namespace SocketIO.WindowsService
+namespace SocketIO.Service
 {
     public static class CommandService
     {

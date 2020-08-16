@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SocketIO.WindowsService.Logger
+namespace SocketIO.Service.Logger
 {
     public static class LoggerService
     {

@@ -1,4 +1,4 @@
-﻿namespace SocketIO.WindowsService.DeviceInfo
+﻿namespace SocketIO.Service.DeviceInfo
 {
     public class Antivirus
     {

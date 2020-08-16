@@ -1,33 +1,28 @@
+﻿using SocketIO.PackageManager;
+using SocketIO.Service.DeviceInfo;
+using SocketIO.Service.Logger;
 using System;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using SocketIO.PackageManager;
-using SocketIO.WindowsService.Logger;
-using SocketIO.WindowsService.DeviceInfo;
 
-namespace SocketIO.WindowsService
+namespace SocketIO.Service
 {
-    public class ServiceWorker : BackgroundService
+    public class WorkerService
     {
         private static ClientWebSocket Socket;
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        public async Task StartAsync()
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                await StartWebsockets();
-            }
+            await StartWebsocket();
         }
 
-        public override async Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync()
         {
-            await Socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "bye", CancellationToken.None);
-            await base.StopAsync(cancellationToken);
+            await Socket?.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "bye", CancellationToken.None);
         }
 
-        public async Task StartWebsockets()
+        private async Task StartWebsocket()
         {
             Socket = new ClientWebSocket();
             var package = CollectDeviceData();
@@ -42,8 +37,8 @@ namespace SocketIO.WindowsService
                 Socket = new ClientWebSocket();
                 await Task.Delay(5000);
                 goto TRY_RECONNECT;
-            }            
-            
+            }
+
             await Socket.SendAsync(new ArraySegment<byte>(package.ToBytes()), WebSocketMessageType.Text, true, CancellationToken.None);
             var receive = ReceiveAsync(Socket);
             await Task.WhenAll(receive);
@@ -66,7 +61,7 @@ namespace SocketIO.WindowsService
                     package.Message = CommandService.ExecuteCommand(package.Message);
 
                     log.Output = !CommandService.IsALogReaderCommand(log.Command) ? package.Message : "log recover";
-                    LoggerService.Log(log);                    
+                    LoggerService.Log(log);
                 }
                 else if (package.Message.Contains("connected"))
                 {
