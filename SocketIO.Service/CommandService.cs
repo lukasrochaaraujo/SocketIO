@@ -34,7 +34,7 @@ namespace SocketIO.Service
             if (command.StartsWith(LOG_TIP))
                 return ExecuteLoggerCommand(command.Split(LOG_TIP)[1]);
 
-            return "Unrecognized command (use cmd [commands] or ps [commands])";
+            return "Unrecognized command (use (cmd | ps | log)";
         }
 
         private static string ExecuteCMDCommand(string args)
@@ -63,7 +63,7 @@ namespace SocketIO.Service
 
         private static string ExecuteLoggerCommand(string args)
         {
-            switch (args)
+            switch (args.Trim())
             {
                 case "first":
                     return LoggerService.ReadFirst();

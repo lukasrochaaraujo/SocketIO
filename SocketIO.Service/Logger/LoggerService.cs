@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SocketIO.Service.Logger
 {
@@ -28,8 +29,13 @@ namespace SocketIO.Service.Logger
 
         public static string ReadAll()
         {
-            return ReadAllAsList().Select(l => l.ToString())
-                                  .ToString();
+            var log = new StringBuilder();
+
+            ReadAllAsList().Select(l => l.ToString())
+                           .ToList()
+                           .ForEach(l => log.AppendLine(l));
+
+            return log.ToString();
         }
 
         public static List<LogCommand> ReadAllAsList()

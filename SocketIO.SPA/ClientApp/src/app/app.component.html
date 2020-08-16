@@ -30,7 +30,7 @@
         <div>
           <input #newCommand 
                  type="text" 
-                 placeholder="(cmd | ps) args" 
+                 placeholder="(cmd | ps | log) args" 
                  class="input-commands" 
                  (keyup.enter)="sendMessage(device.ID, newCommand.value)">
           <textarea 
