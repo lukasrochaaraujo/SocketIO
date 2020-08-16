@@ -60,7 +60,7 @@ namespace SocketIO.Test
         }
 
         [Fact]
-        public void AddSocket()
+        public void AddSocketTest()
         {
             var socket = new WebSocketGhost();
             SocketID = ConnectionManager.AddSocket(socket);
@@ -70,7 +70,7 @@ namespace SocketIO.Test
         }
 
         [Fact]
-        public void RemoveSocket()
+        public void RemoveSocketTest()
         {
             ConnectionManager.RemoveSocketAsync(SocketID).GetAwaiter();
             Assert.True(ConnectionManager.GetAllConnctions().Count == 0);
