@@ -52,8 +52,15 @@ Os projeto foi dividos em:
 - SocketIO.Service: Aplicação para ser implantada (como um serviço) em máquinas clientes
 - SocketIO.SPA: Aplicação web para enviar/receber comandos das máquinas clientes
 
-### Instalação do servicço
+### Instalação do serviço
+
+Copiar o serviço para o diretório desejado e executar os seguintes comandos:
 
 ``
-terminal$ SocketIO.Service.exe install
+$ SocketIO.Service.exe install && SocketIO.Service.exe start
 ``
+
+### Utilização
+
+O servidor (SocketIO.Server) rodará na porta 5001 e ficará intermediando os pacotes e a aplicação cliente (SocketIO.SPA) rodará na porta
+3001, onde será possível realizar o gerenciamento das máquinas (onde devem possuir o serviço instalado e sendo executado).
