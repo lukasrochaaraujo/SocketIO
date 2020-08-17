@@ -41,8 +41,8 @@ Os seguintes pontos serão considerados para uma boa avaliação do seu projeto.
 O projeto foi desenvolvido utilizando arquitetura de comunicação via websockets. As tecnologias utilizadas foram:
 
 - Plataforma .NET Core 3.1
-- Topshelf
-- Angular 10
+- Topshelf 4.2.1
+- Angular 10.0.9
 - xUnit
 
 Os projeto foi dividos em:
@@ -54,13 +54,36 @@ Os projeto foi dividos em:
 
 ### Instalação do serviço
 
-Copiar o serviço para o diretório desejado e executar os seguintes comandos:
+Copiar o serviço para o diretório desejado e executar os seguintes comandos (como administrador):
 
-``
-$ SocketIO.Service.exe install && SocketIO.Service.exe start
-``
+```
+$ \install\directory\SocketIO.Service.exe install 
+$ \install\directory\SocketIO.Service.exe start
+```
 
 ### Utilização
 
-O servidor (SocketIO.Server) rodará na porta 5001 e ficará intermediando os pacotes e a aplicação cliente (SocketIO.SPA) rodará na porta
-3001, onde será possível realizar o gerenciamento das máquinas (onde devem possuir o serviço instalado e sendo executado).
+O servidor (SocketIO.Server) rodará na porta 5001 e ficará intermediando os pacotes entre as aplicações.
+O cliente (SocketIO.SPA) rodará na porta 3001, onde será possível realizar o gerenciamento das máquinas 
+(onde devem possuir o serviço instalado e sendo executado).
+
+A interface cliente, quando recebe uma nova conexão, exibe um card com os dados da máquina, um input para
+introduzir os comandos (na barra superior, ao lado direito, existe um input para enviar um comando a todas
+as máquinas) e um textarea logo abaixo para a exibição da saída. Os comandos seguem o padrão:
+
+```
+(cmd | ps | log) args
+```
+
+- cmd: Prompt de comando
+- ps: Powershell
+- log: Recurso para recuperação de logs
+
+Quando um comando é enviado para um cliente, o mesmo registra o comando solicitado e sua saída, estes podem
+ser recuperados da seguinte maneira:
+
+```
+log first => retorna o primeiro log registrado 
+log last => retorna o último log registrado
+log => retorna todos os registros
+```
