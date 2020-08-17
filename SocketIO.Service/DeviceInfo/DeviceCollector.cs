@@ -21,7 +21,7 @@ namespace SocketIO.Service.DeviceInfo
                 DotNetVersion = Environment.Version.ToString(),
                 DiskDrivers = CollectDisks(),
                 Antivirus = GetAntivirusInstalled(),
-                Firewall = GetFirewallInstalled()
+                Firewall = GetFirewallStatus()
             };
         }
         private static string CollectLocalIPv4()
@@ -73,20 +73,27 @@ namespace SocketIO.Service.DeviceInfo
             return antivirusList;
         }
 
-        private static List<Firewall> GetFirewallInstalled()
+        private static List<Firewall> GetFirewallStatus()
         {
-            var firewallList = new List<Firewall>();
+            var listFirewall = new List<Firewall>();
+            string outputCommand = CommandService.ExecuteCommand("ps Get-NetFirewallProfile");
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                var wmiData = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM FirewallProduct");
-                ManagementObjectCollection data = wmiData.Get();
+                string[] outputCommandSplited = outputCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
+                                                         .Where(l => !string.IsNullOrWhiteSpace(l))
+                                                         .Where(l => l.StartsWith("Name") || l.StartsWith("Enabled"))
+                                                         .ToArray();
 
-                foreach (ManagementObject WmiObject in data)
-                    firewallList.Add(new Firewall() { Name = WmiObject["displayName"].ToString(), Status = WmiObject["enabled"].ToString() });
+                for (int i = 0; i < 5; i += 2)
+                    listFirewall.Add(new Firewall()
+                    {
+                        Name = outputCommandSplited[i].Split(':')[1].Trim(),
+                        Status = bool.TryParse(outputCommandSplited[i + 1].Split(':')[1].Trim(), out bool isEnable) ? "Enable" : "Disable"
+                    });
             }
 
-            return firewallList;
+            return listFirewall;
         }
     }
 }
