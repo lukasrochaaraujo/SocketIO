@@ -76,10 +76,10 @@ namespace SocketIO.Service.DeviceInfo
         private static List<Firewall> GetFirewallStatus()
         {
             var listFirewall = new List<Firewall>();
-            string outputCommand = CommandService.ExecuteCommand("ps Get-NetFirewallProfile");
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
+                string outputCommand = CommandService.ExecuteCommand("ps Get-NetFirewallProfile");
                 string[] outputCommandSplited = outputCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
                                                          .Where(l => !string.IsNullOrWhiteSpace(l))
                                                          .Where(l => l.StartsWith("Name") || l.StartsWith("Enabled"))
